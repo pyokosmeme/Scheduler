@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { createRoot } from "react-dom/client";
 
 type DayOfWeek = "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat" | "Sun";
 
@@ -1923,7 +1924,7 @@ type ViewMode = "calendar" | "table";
 
 const EXPORT_VERSION = 1;
 
-export default function App() {
+function App() {
   const [scenarios, setScenarios] = useState<Scenario[]>(DEFAULT_SCENARIOS);
   const [activeScenarioId, setActiveScenarioId] = useState<string>(
     DEFAULT_SCENARIOS[0].id
@@ -2381,4 +2382,16 @@ export default function App() {
     </div>
   );
 }
+
+const container = document.getElementById("root");
+
+if (!container) {
+  throw new Error("Root element not found");
+}
+
+createRoot(container).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
